@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Tattoos</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1f1f1f;
+            padding: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        #register, #gallery {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #1f1f1f;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            border-radius: 4px;
+            font-size: 1em;
+            color: #e0e0e0;
+            background-color: #333;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #555;
+        }
+
+        button:hover {
+            background-color: #777;
+        }
+
+        .photo-container {
+            position: relative;
+            padding: 20px;
+            background-color: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        footer {
+            background-color: #1f1f1f;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        footer a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Black Tattoos</h1>
+    </header>
+    
+    <div id="register">
+        <h2>Registro de Cliente</h2>
+        <form id="registration-form">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" name="name" required><br>
+            <label for="whatsapp">Número de WhatsApp:</label>
+            <input type="tel" id="whatsapp" name="whatsapp" required><br>
+            <button type="submit">Registrar</button>
+        </form>
+    </div>
+    
+    <div id="gallery" style="display:none;">
+        <h2>Galería de Fotos</h2>
+        <div class="photo-container">
+            <img src="https://via.placeholder.com/800x600.png?text=Tatuaje+Ejemplo" alt="Foto" id="current-photo">
+            <p id="photo-description">Descripción de la foto - Precio: $100</p>
+            <button onclick="previousPhoto()">Atrás</button>
+            <button onclick="nextPhoto()">Adelante</button>
+        </div>
+    </div>
+    
+    <footer>
+        <a href="https://wa.me/525644249262" target="_blank">Contáctanos por WhatsApp</a>
+        <p>Erick Gil, Tecolutilla, Comalcalco Tabasco</p>
+    </footer>
+    
+    <script>
+        let currentIndex = 0;
+        const photos = [
+            { src: 'https://via.placeholder.com/800x600.png?text=Tatuaje+Ejemplo', description: 'Descripción de la foto - Precio: $100' }
+            // Puedes agregar más fotos si es necesario
+        ];
+
+        document.getElementById('registration-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('register').style.display = 'none';
+            document.getElementById('gallery').style.display = 'block';
+        });
+
+        function updatePhoto() {
+            const photo = photos[currentIndex];
+            document.getElementById('current-photo').src = photo.src;
+            document.getElementById('photo-description').textContent = photo.description;
+        }
+
+        function previousPhoto() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : photos.length - 1;
+            updatePhoto();
+        }
+
+        function nextPhoto() {
+            currentIndex = (currentIndex < photos.length - 1) ? currentIndex + 1 : 0;
+            updatePhoto();
+        }
+    </script>
+</body>
+</html>
